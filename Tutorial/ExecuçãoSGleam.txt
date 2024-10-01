@@ -1,0 +1,16 @@
+Para executar arquivos no formato .gleam para aversão sgleam, execute os seguintes passos:
+
+1- Em alguma pasta do computador (c:\Program_Files, por exemplo) crie uma pasta e coloque o arquivo 'sgleam.exe', que está disponível neste repositório.
+
+2- Aperte o botão do Windows, busque por 'Editar variáveis de ambiente do sistema' e abra a tela para fazer a edição.
+
+3- Clique no botão 'Variáveis de Ambiente' e selecione a categoria 'Path', então clique em 'Editar' (faça esse e os próximos passos para as Variáveis de
+usuário e para as Variáveis do sistema).
+
+4- Na nova tela, clique em 'Novo' e coloque no novo campo o caminho da pasta que foi criada no passo 1, então feche todas as abas clicando 'Ok'.
+
+Dessa forma, os arquivos em formato .gleam podem ser executados pelo terminal em qualquer diretório do computador.
+
+slgeam (abre o REPL do gleam - janela interativa)
+slgeam nome_arquivo.gleam (executa o arquivo)
+slgeam -i nome_arquivo.gleam (abre o RPL do gleam utilizando o contexto do arquivo)

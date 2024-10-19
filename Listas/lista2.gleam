@@ -156,3 +156,83 @@ pub fn maximo_examples() {
 
 // Exercício 22
 
+/// Transforma os primeiros *n* caracteres da *frase* em "x". A frase resultante não
+/// ultrapassa o seu tamanho original.
+/// 
+/// Requer que *n* seja um inteiro natural.
+pub fn censura(frase: String, n: Int) -> String {
+  case n > string.length(frase) {
+    True -> string.repeat("x", string.length(frase))
+    False -> string.repeat("x", n) <> string.drop_left(frase, n)
+  }
+}
+pub fn censura_examples() {
+  check.eq(censura("", 3), "")
+  check.eq(censura("oiee", 0), "oiee")
+  check.eq(censura("a não", 2), "xxnão")
+  check.eq(censura("xxx", 1), "xxx")
+  check.eq(censura("salve", 999), "xxxxx")
+}
+
+// Exercício 23
+
+/// Verifica se o *texto* não possui espaços extras, isto é, começa ou termina com espaço(s), devolvendo
+/// True caso não possua e False caso possua. Caso o *texto* seja vazio, será devolvido False.
+pub fn espacos_extras(texto: String) -> Bool {
+  string.slice(texto, 0, 1) != " " && string.slice(texto, -1, 1) != " " && string.length(texto) != 0
+}
+pub fn espacos_extras_examples() {
+  check.eq(espacos_extras(""), False)
+  check.eq(espacos_extras("Olá"), True)
+  check.eq(espacos_extras(" Apenas"), False)
+  check.eq(espacos_extras("Naaaaaoo "), False)
+  check.eq(espacos_extras("  tchau  "), False)
+  check.eq(espacos_extras("tchau tchau"), True)
+}
+
+// Exercício 24
+
+/// Calcula o imposto que deve ser pago a partir da *renda*. Caso renda seja igual ou menor a 1000, o valor
+/// do imposto é 5% da renda; caso seja maior que 1000 e igual ou menor a 5000, é cobrado 50 somado a 10%
+/// do excedente de 1000; e caso a renda seja maior que 5000, é cobrado 450 somado a 20% do excedente de 5000.
+/// 
+/// Requer que a *renda* seja maior ou igual a zero.
+pub fn imposto(renda: Float) -> Float {
+  case renda >. 5000.0 {
+    True -> renda *. 0.2 +. 450.0
+    False -> case renda >. 1000.0 {
+      True -> renda *. 0.1 +. 50.0
+      False -> renda *. 0.05
+    }
+  }
+}
+pub fn imposto_examples() {
+  check.eq(imposto(0.0), 0.0)
+  check.eq(imposto(404.7), 20.235)
+  check.eq(imposto(1000.0), 50.0)
+  check.eq(imposto(2580.75), 308.075)
+  check.eq(imposto(5000.0), 550.0)
+  check.eq(imposto(9785.29), 2407.058)
+}
+
+// Exercício 25
+
+/// Verifica se a *palavra* é duplicada, ou seja, é formada por duas sequências iguais de caracteres, separadas ou não apenas
+/// por hífen.
+pub fn verifica_duplicada(palavra: String) -> Bool {
+  case string.length(palavra) % 2 == 0 {
+    True -> string.drop_left(palavra, string.length(palavra)/2) == string.drop_right(palavra, string.length(palavra)/2) && string.drop_left(palavra, string.length(palavra)/2) != string.repeat(" ", string.length(palavra)/2)
+    False -> string.drop_left(palavra, string.length(palavra)/2 + 1) == string.drop_right(palavra, string.length(palavra)/2 + 1) && string.drop_left(palavra, string.length(palavra)/2 + 1) != string.repeat(" ", string.length(palavra)/2) && string.slice(palavra, string.length(palavra)/2, 1) == "-"
+  }
+}
+pub fn verifica_duplicada_examples() {
+  check.eq(verifica_duplicada(""), False)
+  check.eq(verifica_duplicada(" "), False)
+  check.eq(verifica_duplicada("  "), False)
+  check.eq(verifica_duplicada("oie"), False)
+  check.eq(verifica_duplicada("oi"), False)
+  check.eq(verifica_duplicada("anão"), False)
+  check.eq(verifica_duplicada("ii"), True)
+  check.eq(verifica_duplicada("vamo-vamo"), True)
+  check.eq(verifica_duplicada("vamo vamo"), False)
+}

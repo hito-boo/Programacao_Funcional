@@ -1,4 +1,5 @@
 import sgleam/check
+import gleam/float
 import gleam/int
 import gleam/string
 
@@ -235,4 +236,20 @@ pub fn verifica_duplicada_examples() {
   check.eq(verifica_duplicada("ii"), True)
   check.eq(verifica_duplicada("vamo-vamo"), True)
   check.eq(verifica_duplicada("vamo vamo"), False)
+}
+
+// Exercício 26
+
+/// Calcula a quantidade mínima de azulejos necessários para azulejar uma parede com o *comprimento* e a *altura*, levando em
+/// conta que o azulejo é quadrado e possui 20 cm de lado.
+/// 
+/// Requer que *comprimento* e *altura* sejam positivas.
+pub fn azulejar(comprimento: Float, altura: Float) -> Int {
+  // Problema da implementação: quando é necessário quebrar os azulejos - possível reutilização?
+  float.round(float.ceiling(comprimento /. 0.2)) * float.round(float.ceiling(altura /. 0.2))
+}
+pub fn azulejar_examples() {
+  check.eq(azulejar(0.15, 0.1), 1)
+  check.eq(azulejar(0.3, 0.3), 4)
+  check.eq(azulejar(1.8, 1.7), 81)
 }
